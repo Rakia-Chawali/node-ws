@@ -1,13 +1,21 @@
-const generatePassword = (length) => {
-  const characters =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+";
-  let password = "";
+const generatePassword= require("generate-password")
 
-  for (let i = 0; i < length; i++) {
-    password += characters.charAt(
-      Math.floor(Math.random() * characters.length)
-    );
-  }
+
+function generateRandomPassword (){
+
+  const password = generatePassword.generate({
+    length:10,
+    numbers:true,
+    symbols:true,
+    uppercase:true,
+    strict:true,
+    lowercase:true
+  }) 
+
   console.log(password);
-};
-generatePassword(12);
+
+
+}
+
+generateRandomPassword()
+

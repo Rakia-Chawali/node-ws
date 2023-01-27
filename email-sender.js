@@ -1,29 +1,30 @@
 const nodemailer = require("nodemailer");
+require("dotenv").config();
+
+
 
 // create a transporter object to handle sending the email
 let transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com", // your email server
-  port: 587,
-  secure: false, // use SSL
+  service: "gmail",
   auth: {
-    user: "rakiagomycode@gmail.com",
-    pass: "rakia2018*",
-  },
+    user: process.env.adrs,
+    pass: process.env.pwd,
+  }
 });
 
 // setup email data
 let mailOptions = {
-  from: '"Rakia Chawali" <rakiagomycode@gmail.com>',
-  to: "rakiamohamed117@.com",
+  from: "rakiagomycode@gmail.com",
+  to: "rakiamohamed117@gmail.com",
   subject: "Subject of the email",
   text: "Plain text message",
-  html: "<p>HTML message</p>",
 };
 
 // send the email
 transporter.sendMail(mailOptions, (error, info) => {
   if (error) {
-    return console.log(error);
+    console.log(error);
+  } else {
+    console.log("Email sent: ", info.response);
   }
-  console.log("Email sent: %s", info.messageId);
 });
